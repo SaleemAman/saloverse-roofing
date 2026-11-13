@@ -1,0 +1,10 @@
+{
+  "name": "saloverse-roofing",
+  "compatibility_date": "2026-11-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "./server.ts",
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS"
+  }
+}

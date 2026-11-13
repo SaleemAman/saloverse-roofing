@@ -1,0 +1,123 @@
+
+
+:root {
+  --primary-color: #1e3a8a;
+  --accent-color: #dc2626;
+  --bg-light: #f1f5f9;
+  --text-dark: #0f172a;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 12000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+header {
+  text-align: center;
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: var(--primary-color);
+  margin: 0 0 10px 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  color: #64748b;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  border-bottom: 2px solid var(--bg-light);
+  padding-bottom: 15px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px 0;
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--bg-light);
+}
+
+ul li::before {
+  content: "✓";
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+}
+
+button:hover {
+  background-color: #b91c1c;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.checkout-demo {
+  background: #ffffff;
+  padding: 30px;
+  border: 2px solid #e2e8f0;
+}
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+.info-column section:last-child,
+.checkout-column section {
+  margin-bottom: 0;
+}
+@media (max-width: 850px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}
