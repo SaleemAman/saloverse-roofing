@@ -1,75 +1,49 @@
-# React + TypeScript + Vite
+# Saloverse Roofing Services — Whop Website Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Demo:** [https://saloverse-roofing-app.whop.site/](https://saloverse-roofing-app.whop.site/)
 
-Currently, two official plugins are available:
+A modern, conversion-focused roofing services website template engineered for **Whop Websites** and deployed on **Cloudflare Workers**. This template combines a service showcase and lead-generation workflow with embedded Whop checkout elements for seamless deposit collection.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🏗️ Implementation Steps & Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Responsive Two-Column UI & Custom Light Theme
+- Designed a two-column split layout (`App.css`) optimized for local home-service businesses.
+- Built a custom light theme with clear visual hierarchy, pairing service cards and an interactive estimate request form on the left with a sticky payment terminal on the right.
 
-## Expanding the ESLint configuration
+### 2. Whop Elements SDK Integration
+- Integrated `@whop/elements` and `@whop/elements-react` using separated `<Checkout>` and `<Payments>` provider wrappers to prevent slot conflicts.
+- Configured **`ExpressCheckoutElement`** for fast one-click payments, **`CheckoutElement`** for standard card processing, and **`BrandingElement`** for security badges.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. Client-Side Lead Capture & Event Telemetry
+- Implemented a state-managed estimate form capturing customer name, contact info, service type, and project notes.
+- Wired form submission directly to Whop's tracking SDK via `window.whop.track('estimate_requested')` to log lead events without external backend dependencies.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 4. Cloudflare Workers & Whop Hosting Pipeline
+- Configured `@cloudflare/vite-plugin` and `@whop/cli/vite` inside `vite.config.ts` to emit both static client assets (`dist/client`) and SSR worker modules (`dist/server`).
+- Added a lightweight Cloudflare Worker entry (`server.ts`) and `wrangler.jsonc` asset binding to serve static files with an SPA fallback.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tech Stack
 
-```
+- **Framework:** React, TypeScript, Vite
+- **Checkout & Telemetry:** `@whop/elements`, `@whop/elements-react`
+- **Edge Runtime & Deployment:** Cloudflare Workers, Wrangler, `@cloudflare/vite-plugin`, `@whop/cli`
+- **Styling:** Custom CSS3 Grid & Flexbox (`App.css`)
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📂 Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+```text
+├── src/
+│   ├── App.tsx          # Two-column layout, lead form logic, & Whop SDK wrappers
+│   ├── App.css          # Custom light-theme stylesheet
+│   └── main.tsx         # Application entry point
+├── index.html           # HTML template
+├── server.ts            # Cloudflare Worker script for static asset routing
+├── vite.config.ts       # Vite build & plugin configuration
+├── wrangler.jsonc       # Cloudflare Worker & asset binding config
+└── package.json         # Project dependencies and scripts
